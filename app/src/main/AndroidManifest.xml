@@ -15,9 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity android:name=".StudentChangeActivity">
-            android:label="修改个人信息"
-        </activity>
+        <activity
+            android:name=".StudentChangeActivity"
+            android:label="修改个人信息" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,10 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddCourseActivity">
-            android:label="修改课程信息"
-        </activity>
-        <activity android:name=".ModifyPasswdActivity"></activity>
+        <activity
+            android:name=".AddCourseActivity"
+            android:label="修改课程信息" />
+        <activity android:name=".ModifyPasswdActivity" />
     </application>
 
 </manifest>
