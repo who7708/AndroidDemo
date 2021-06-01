@@ -4,13 +4,13 @@ package com.clutch.student.Adapter;
  * Created by clutchyu on 2018/3/19.
  */
 
-
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.clutch.student.Entity.Student_info;
 import com.clutch.student.R;
@@ -21,9 +21,9 @@ import java.util.List;
  * 学生信息类适配器，将查找到的信息展示在ThirdFragment上
  * Student_info类，属性为图片Id，和一个字符串代表student中的各个属性，即每获取一个student对象将其转化成5个该对象，添加到List中。
  */
-public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHolder>{
+public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHolder> {
 
-    private List<Student_info> mStudentList;
+    private final List<Student_info> mStudentList;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         View StudentView;
@@ -39,7 +39,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     }
 
     public StudentAdapter(List<Student_info> StudentList) {
-        mStudentList=StudentList;
+        mStudentList = StudentList;
     }
 
     @Override

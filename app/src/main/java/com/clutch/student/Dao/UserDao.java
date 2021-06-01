@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.clutch.student.Entity.User;
 
@@ -15,8 +14,8 @@ import com.clutch.student.Entity.User;
  */
 
 public class UserDao {
-    private Context context;
-    private MyDatabaseHelper dbHelper;
+    private final Context context;
+    private final MyDatabaseHelper dbHelper;
 
     public UserDao(Context context) {
         this.context = context;
@@ -38,14 +37,13 @@ public class UserDao {
                 while (cursor.moveToNext()) {
                     User user = new User();
                     String passwd = cursor.getString(cursor.getColumnIndex("password"));
-                    if(passwd.equals(password)){
+                    if (passwd.equals(password)) {
                         return true;
                     }
 
                 }
 
             }
-
 
         } catch (Exception e) {
 
@@ -60,26 +58,27 @@ public class UserDao {
 
         return false;
     }
+
     /**
      * 向表中插入数据
      */
-    public boolean insertLog(int studentId,String password){
+    public boolean insertLog(int studentId, String password) {
         SQLiteDatabase db = null;
         try {
             db = dbHelper.getWritableDatabase();
             db.beginTransaction();
             ContentValues values = new ContentValues();
-            values.put("student_id",studentId);
-            values.put("password",password);
-            db.insertOrThrow("log",null,values);
+            values.put("student_id", studentId);
+            values.put("password", password);
+            db.insertOrThrow("log", null, values);
             db.setTransactionSuccessful();
             return true;
-        }catch (SQLiteConstraintException e){
+        } catch (SQLiteConstraintException e) {
             //Toast.makeText(context, "主键重复", Toast.LENGTH_SHORT).show();
             return false;
-        }catch (Exception e){
+        } catch (Exception e) {
 
-        }finally {
+        } finally {
             if (db != null) {
                 db.endTransaction();
                 db.close();
@@ -87,29 +86,29 @@ public class UserDao {
         }
         return false;
     }
+
     /**
      * 修改密码
      */
-    public boolean modifyPasswd(User user,String newPasswd){
+    public boolean modifyPasswd(User user, String newPasswd) {
         SQLiteDatabase db = null;
         String sql = "update log set password = ? where student_id = ?";
         try {
             db = dbHelper.getWritableDatabase();
             db.beginTransaction();
-            if(check(user.getId(),user.getPassword())){
-                db.execSQL(sql,new Object[]{newPasswd,user.getId()});
+            if (check(user.getId(), user.getPassword())) {
+                db.execSQL(sql, new Object[]{newPasswd, user.getId()});
                 db.setTransactionSuccessful();
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
-        }catch (SQLiteConstraintException e){
+        } catch (SQLiteConstraintException e) {
             //Toast.makeText(context, "主键重复", Toast.LENGTH_SHORT).show();
             return false;
-        }catch (Exception e){
+        } catch (Exception e) {
 
-        }finally {
+        } finally {
             if (db != null) {
                 db.endTransaction();
                 db.close();

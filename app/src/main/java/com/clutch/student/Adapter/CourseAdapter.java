@@ -4,25 +4,27 @@ package com.clutch.student.Adapter;
  * Created by clutchyu on 2018/3/17.
  */
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.clutch.student.Entity.Course;
-import java.util.List;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.clutch.student.Entity.Course;
 import com.clutch.student.R;
 
+import java.util.List;
+
 /**
- *课程类适配器，将课程信息展示在CourseFragment上
+ * 课程类适配器，将课程信息展示在CourseFragment上
  * 管理员查看所有课程信息
  */
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder>{
+public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
 
-    private List<Course> mCourseList;
+    private final List<Course> mCourseList;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         View CourseView;
@@ -38,7 +40,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     }
 
     public CourseAdapter(List<Course> courseList) {
-        mCourseList=courseList;
+        mCourseList = courseList;
     }
 
     @Override
@@ -74,7 +76,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         Course course = mCourseList.get(position);
         holder.CourseImage.setImageResource(course.getImageId());
-        holder.CourseName.setText("课程号："+course.getId()+"          "+course.getName()+"\n学分："+course.getCredit());
+        holder.CourseName.setText("课程号：" + course.getId() + "          " + course.getName() + "\n学分：" + course.getCredit());
     }
 
     @Override

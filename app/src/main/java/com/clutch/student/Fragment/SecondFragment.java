@@ -8,14 +8,15 @@ package com.clutch.student.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.clutch.student.Adapter.ScoreAdapter;
 import com.clutch.student.Dao.ScoreDao;
@@ -23,22 +24,20 @@ import com.clutch.student.Entity.Course;
 import com.clutch.student.MainActivity;
 import com.clutch.student.MyApplication;
 import com.clutch.student.R;
+
 import java.util.List;
-
-
-
 
 public class SecondFragment extends Fragment {
     static Context context = MyApplication.getInstance();
-    private static ScoreDao  uncourse = new ScoreDao(context);   //未选的课程
+    private static final ScoreDao uncourse = new ScoreDao(context);   //未选的课程
     private static RecyclerView recyclerView_undo;
     private static List<Course> undoList;
     private static ScoreAdapter adapter;
     private static TextView emptyText;
+
     public SecondFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,18 +45,18 @@ public class SecondFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_second, container, false);
         recyclerView_undo = (RecyclerView) view.findViewById(R.id.recycler_undo);
-        emptyText = (TextView) view.findViewById(R.id.empty_text) ;
+        emptyText = (TextView) view.findViewById(R.id.empty_text);
         undoList = uncourse.getUnCourse(MainActivity.getStudentId());
-        if(undoList==null){
+        if (undoList == null) {
             emptyText.setVisibility(View.VISIBLE);
             recyclerView_undo.setVisibility(View.GONE);
-        }else {
+        } else {
             //StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
             LinearLayoutManager layoutManager = new LinearLayoutManager(context);
             recyclerView_undo.setLayoutManager(layoutManager);
             ScoreAdapter adapter = new ScoreAdapter(undoList);
             recyclerView_undo.setAdapter(adapter);
-            DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView_undo.getContext(),layoutManager.getOrientation());
+            DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView_undo.getContext(), layoutManager.getOrientation());
             recyclerView_undo.addItemDecoration(mDividerItemDecoration);
         }
         return view;
@@ -68,15 +67,15 @@ public class SecondFragment extends Fragment {
      */
     public static void updata() {
         undoList = uncourse.getUnCourse(MainActivity.getStudentId());
-        if(undoList==null){
+        if (undoList == null) {
             emptyText.setVisibility(View.VISIBLE);
             recyclerView_undo.setVisibility(View.GONE);
-        }else {
+        } else {
             LinearLayoutManager layoutManager = new LinearLayoutManager(context);
             recyclerView_undo.setLayoutManager(layoutManager);
             ScoreAdapter adapter = new ScoreAdapter(undoList);
             recyclerView_undo.setAdapter(adapter);
-            DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView_undo.getContext(),layoutManager.getOrientation());
+            DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView_undo.getContext(), layoutManager.getOrientation());
             recyclerView_undo.addItemDecoration(mDividerItemDecoration);
 
         }

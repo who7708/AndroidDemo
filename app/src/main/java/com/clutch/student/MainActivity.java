@@ -8,21 +8,24 @@ package com.clutch.student;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.clutch.student.Adapter.ViewPagerAdapter;
+import com.clutch.student.Dao.MyDatabaseHelper;
 import com.clutch.student.Fragment.FirstFragment;
 import com.clutch.student.Fragment.ManagerFirstFragment;
 import com.clutch.student.Fragment.ManagerSecondFragment;
 import com.clutch.student.Fragment.ManagerThirdFragment;
 import com.clutch.student.Fragment.SecondFragment;
 import com.clutch.student.Fragment.ThirdFragment;
-import com.clutch.student.Dao.MyDatabaseHelper;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class MainActivity extends AppCompatActivity {
 
     //dbHelper
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
-        studentId = intent.getIntExtra("id",-1);
+        studentId = intent.getIntExtra("id", -1);
         //创建或打开数据库
         dbHelper = new MyDatabaseHelper(this);
         dbHelper.getWritableDatabase();
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         //Initializing the bottomNavigationView
-        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -86,12 +89,10 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 if (prevMenuItem != null) {
                     prevMenuItem.setChecked(false);
-                }
-                else
-                {
+                } else {
                     bottomNavigationView.getMenu().getItem(0).setChecked(false);
                 }
-                Log.d("page", "onPageSelected: "+position);
+                Log.d("page", "onPageSelected: " + position);
                 bottomNavigationView.getMenu().getItem(position).setChecked(true);
                 prevMenuItem = bottomNavigationView.getMenu().getItem(position);
 
@@ -103,22 +104,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
         setupViewPager(viewPager);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main,menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.switch_item:
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -130,20 +129,24 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public static int  getStudentId(){
+    public static int getStudentId() {
         return studentId;
     }
-    public  Context  context(){return this;}
+
+    public Context context() {
+        return this;
+    }
+
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        if(getStudentId()==0){
-            managerFirstFragment=new ManagerFirstFragment();
-            managerSecondFragment=new ManagerSecondFragment();
-            managerThirdFragment=new ManagerThirdFragment();
+        if (getStudentId() == 0) {
+            managerFirstFragment = new ManagerFirstFragment();
+            managerSecondFragment = new ManagerSecondFragment();
+            managerThirdFragment = new ManagerThirdFragment();
             adapter.addFragment(managerFirstFragment);
             adapter.addFragment(managerSecondFragment);
             adapter.addFragment(managerThirdFragment);
-        }else {
+        } else {
             firstFragment = new FirstFragment();
             secondFragment = new SecondFragment();
             thirdFragment = new ThirdFragment();

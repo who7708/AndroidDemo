@@ -4,24 +4,26 @@ package com.clutch.student.Adapter;
  * Created by clutchyu on 2018/3/22.
  */
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.clutch.student.Entity.CourseSec;
-import java.util.List;
 import com.clutch.student.R;
 
+import java.util.List;
+
 /**
- *课程类适配器，将课程信息展示在CourseSecFragment上
+ * 课程类适配器，将课程信息展示在CourseSecFragment上
  * 管理员查看所有课程信息
  */
-public class CourseSecAdapter extends RecyclerView.Adapter<CourseSecAdapter.ViewHolder>{
+public class CourseSecAdapter extends RecyclerView.Adapter<CourseSecAdapter.ViewHolder> {
 
     private List<CourseSec> mCourseSecList;
-
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         View CourseSecView;
@@ -37,10 +39,11 @@ public class CourseSecAdapter extends RecyclerView.Adapter<CourseSecAdapter.View
     }
 
     public CourseSecAdapter(List<CourseSec> CourseSecList) {
-        mCourseSecList=CourseSecList;
+        mCourseSecList = CourseSecList;
     }
-    public void changeAdapter(List<CourseSec> CourseSecList){
-        mCourseSecList=CourseSecList;
+
+    public void changeAdapter(List<CourseSec> CourseSecList) {
+        mCourseSecList = CourseSecList;
     }
 
     @Override
@@ -74,7 +77,7 @@ public class CourseSecAdapter extends RecyclerView.Adapter<CourseSecAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         CourseSec CourseSec = mCourseSecList.get(position);
         holder.CourseSecImage.setImageResource(CourseSec.getImageId());
-        holder.CourseSecName.setText("学号： "+CourseSec.getCourse_id()+"         "+CourseSec.getCourse_name()+"\n学分："+CourseSec.getCredit()+"\n成绩："+CourseSec.getGrade());
+        holder.CourseSecName.setText("学号： " + CourseSec.getCourse_id() + "         " + CourseSec.getCourse_name() + "\n学分：" + CourseSec.getCredit() + "\n成绩：" + CourseSec.getGrade());
     }
 
     @Override

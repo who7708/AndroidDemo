@@ -1,18 +1,18 @@
 package com.clutch.student.Fragment;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.clutch.student.Adapter.CourseAdapter;
 import com.clutch.student.AddCourseActivity;
@@ -30,12 +30,15 @@ import java.util.List;
 
 public class ManagerFirstFragment extends Fragment {
     static Context context = MyApplication.getInstance();
-    private CourseDao course = new CourseDao(context);
+    private final CourseDao course = new CourseDao(context);
     private static RecyclerView recyclerView;
     private static TextView emptyText;
     private Button add;
     private static List<Course> CourseList;
-    public ManagerFirstFragment(){}
+
+    public ManagerFirstFragment() {
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manager_first, container, false);
@@ -43,19 +46,19 @@ public class ManagerFirstFragment extends Fragment {
         emptyText = (TextView) view.findViewById(R.id.empty_text);
         add = (Button) view.findViewById(R.id.add);
         CourseList = course.getCourse();
-        if(CourseList==null){
+        if (CourseList == null) {
             emptyText.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
-        }else{
+        } else {
             LinearLayoutManager layoutManager = new LinearLayoutManager(context);
             recyclerView.setLayoutManager(layoutManager);
             CourseAdapter adapter = new CourseAdapter(CourseList);
             recyclerView.setAdapter(adapter);
-            DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),layoutManager.getOrientation());
+            DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation());
             recyclerView.addItemDecoration(mDividerItemDecoration);
         }
 
-        add.setOnClickListener(new View.OnClickListener(){
+        add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //跳转到添加课程页面
                 Intent intent = new Intent(context, AddCourseActivity.class);
@@ -63,24 +66,23 @@ public class ManagerFirstFragment extends Fragment {
             }
         });
 
-
-
         return view;
     }
-    public void onResume(){
+
+    public void onResume() {
         super.onResume();
         CourseList = course.getCourse();
-        if(CourseList==null){
+        if (CourseList == null) {
             emptyText.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
-        }else{
+        } else {
             emptyText.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
             LinearLayoutManager layoutManager = new LinearLayoutManager(context);
             recyclerView.setLayoutManager(layoutManager);
             CourseAdapter adapter = new CourseAdapter(CourseList);
             recyclerView.setAdapter(adapter);
-            DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),layoutManager.getOrientation());
+            DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation());
             recyclerView.addItemDecoration(mDividerItemDecoration);
         }
     }

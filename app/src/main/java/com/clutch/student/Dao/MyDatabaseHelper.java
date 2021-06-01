@@ -1,7 +1,9 @@
 package com.clutch.student.Dao;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 /**
  * Created by clutchyu on 2018/3/17.
  * 创建表，运行MainActivity时首先创建该对象dbHelper
@@ -14,13 +16,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             "id int  primary key," +
             "name text not null," +
             "sex  text  not null," +
-            "age  int  not null,"+
+            "age  int  not null," +
             "phone text not null)";
     public static final String CREATE_COURSE = "create table course(" +
             "course_id int primary key," +
             "course_name text unique," +
-            "credit int  not null)" ;
-    public static  final String CREATE_SCORE = "create table score(" +
+            "credit int  not null)";
+    public static final String CREATE_SCORE = "create table score(" +
             "student_id int not null," +
             "course_id int not null," +
             "grade int," +
@@ -32,12 +34,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             "password   text  not null," +
             "constraint fk_ID foreign key(student_id) references student(id) on delete cascade)";
 
-
-
-    private Context mContext;
+    private final Context mContext;
 
     //构造方法：第一个参数Context，第二个参数数据库名，第三个参数cursor允许我们在查询数据的时候返回一个自定义的光标位置，一般传入的都是null，第四个参数表示目前库的版本号（用于对库进行升级）
-    public  MyDatabaseHelper(Context context){
+    public MyDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         mContext = context;
     }
@@ -59,8 +59,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     /**
      * 插入初始化数据
      */
-    public void init(SQLiteDatabase db){
-        String sql[] = {"insert into student values (10001,'小李','男',20,'123456789')",
+    public void init(SQLiteDatabase db) {
+        String[] sql = {"insert into student values (10001,'小李','男',20,'123456789')",
                 "insert into student values (10002,'小王','男',20,'123456789')",
                 "insert into student values (10003,'小张','女',20,'123456789')",
                 "insert into student values (10004,'小周','男',20,'123456789')",
@@ -91,7 +91,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 "insert into log values (10006,'123456')",
                 "insert into log values (00000,'000000')",
         };
-        for(int i= 0;i<sql.length;i++){
+        for (int i = 0; i < sql.length; i++) {
             db.execSQL(sql[i]);
         }
     }

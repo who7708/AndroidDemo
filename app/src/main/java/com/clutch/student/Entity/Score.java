@@ -11,18 +11,38 @@ public class Score {
     private int course_id;
     private int student_id;
     private int grade;
-    public Score(){
+
+    public Score() {
 
     }
-    public Score(int course,int student,int grade){
+
+    public Score(int course, int student, int grade) {
         course_id = course;
         student_id = student;
         this.grade = grade;
     }
-    public int getCourseId(){return this.course_id;}
-    public void setCourseId(int course_id){this.course_id = course_id;}
-    public int getStudentId(){return this.student_id;}
-    public void setStudentId(int student_id){this.student_id = student_id;}
-    public int getGrade(){return this.grade;}
-    public void setGrade(int grade){this.grade = grade;}
+
+    public int getCourseId() {
+        return this.course_id;
+    }
+
+    public void setCourseId(int course_id) {
+        this.course_id = course_id;
+    }
+
+    public int getStudentId() {
+        return this.student_id;
+    }
+
+    public void setStudentId(int student_id) {
+        this.student_id = student_id;
+    }
+
+    public int getGrade() {
+        return this.grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
 }

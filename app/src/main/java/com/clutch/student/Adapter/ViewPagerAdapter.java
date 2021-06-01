@@ -15,18 +15,16 @@ import com.clutch.student.Fragment.SecondFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-    private  List<Fragment> mFragmentList = new ArrayList<>();
-    private FragmentManager fm;
+    private List<Fragment> mFragmentList = new ArrayList<>();
+    private final FragmentManager fm;
+
     public int getItemPosition(Object object) {
 
         if (object instanceof FirstFragment) {
-            ((FirstFragment)object).update();
-        }else if(object instanceof SecondFragment){
-            ((SecondFragment)object).updata();
+            FirstFragment.update();
+        } else if (object instanceof SecondFragment) {
+            SecondFragment.updata();
         }
         return super.getItemPosition(object);
     }
@@ -44,10 +42,12 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         this.mFragmentList = fragments;
         notifyDataSetChanged();
     }
+
     public ViewPagerAdapter(FragmentManager manager) {
         super(manager);
         this.fm = manager;
     }
+
     @Override
     public Fragment getItem(int position) {
         return mFragmentList.get(position);
@@ -61,7 +61,5 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public void addFragment(Fragment fragment) {
         mFragmentList.add(fragment);
     }
-
-
 
 }

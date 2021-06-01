@@ -10,14 +10,15 @@ package com.clutch.student.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.clutch.student.Adapter.StudentAdapter;
 import com.clutch.student.Dao.StudentDao;
@@ -29,18 +30,16 @@ import com.clutch.student.StudentChangeActivity;
 
 import java.util.List;
 
-
-
 public class ThirdFragment extends Fragment {
     Context context = MyApplication.getInstance();
-    private StudentDao student = new StudentDao(context);
+    private final StudentDao student = new StudentDao(context);
     private List<Student_info> StudentList = student.getStudent(MainActivity.getStudentId());
     private RecyclerView recyclerView;
-    private int studentId = MainActivity.getStudentId();
+    private final int studentId = MainActivity.getStudentId();
+
     public ThirdFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,15 +53,15 @@ public class ThirdFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         StudentAdapter adapter = new StudentAdapter(StudentList);
         recyclerView.setAdapter(adapter);
-        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),layoutManager.getOrientation());
+        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation());
         recyclerView.addItemDecoration(mDividerItemDecoration);
 
-        Button button = (Button) view.findViewById (R.id.click);
-        button.setOnClickListener(new View.OnClickListener(){
+        Button button = (Button) view.findViewById(R.id.click);
+        button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 Intent intent = new Intent(context, StudentChangeActivity.class);
-                intent.putExtra("id",studentId);
+                intent.putExtra("id", studentId);
                 startActivity(intent);
 
             }
@@ -72,7 +71,8 @@ public class ThirdFragment extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
-    public void onResume(){
+
+    public void onResume() {
         super.onResume();
         StudentList = student.getStudent(MainActivity.getStudentId());
         StudentAdapter adapter = new StudentAdapter(StudentList);
