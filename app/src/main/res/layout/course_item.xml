@@ -5,12 +5,12 @@
     android:layout_margin="5dp">
 
     <ImageView
-        android:id="@+id/Course_image"
+        android:id="@+id/course_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/Course_name"
+        android:id="@+id/course_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
