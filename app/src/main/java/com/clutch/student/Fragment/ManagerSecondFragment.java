@@ -1,8 +1,6 @@
 package com.clutch.student.Fragment;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,11 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.clutch.student.AddCourseActivity;
 import com.clutch.student.Dao.ScoreDao;
 import com.clutch.student.EditCheck;
 import com.clutch.student.Entity.Score;
-import com.clutch.student.MainActivity;
 import com.clutch.student.MyApplication;
 import com.clutch.student.R;
 
